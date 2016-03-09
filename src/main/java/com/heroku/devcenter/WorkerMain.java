@@ -22,7 +22,6 @@ public class WorkerMain {
 
 			String norm = Normalizer.normalize(playerItem.getName(), Normalizer.Form.NFD);
 			norm = norm.replaceAll("[^\\p{ASCII}]", "");
-
 			tempPlayer.setNormalizedName(norm);
 
 			playerService.save(tempPlayer);
