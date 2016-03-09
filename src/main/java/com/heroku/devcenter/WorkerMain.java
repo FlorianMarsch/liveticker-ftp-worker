@@ -1,43 +1,33 @@
 package com.heroku.devcenter;
 
+import java.text.Normalizer;
+import java.util.List;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.QueueingConsumer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import com.heroku.devcenter.axis.PlayerItem;
+import com.heroku.devcenter.axis.PlayerItemWebservice;
+import com.heroku.devcenter.axis.player.Player;
+import com.heroku.devcenter.axis.player.PlayerService;
 
 public class WorkerMain {
 
-    final static Logger logger = LoggerFactory.getLogger(WorkerMain.class);
+	public static void main(String[] args) throws Exception {
+		PlayerService playerService = new PlayerService();
+		PlayerItemWebservice webService = new PlayerItemWebservice();
+		List<PlayerItem> allPlayerItems = webService.getAllPlayers();
 
-    public static void main(String[] args) throws Exception {
+		for (PlayerItem playerItem : allPlayerItems) {
+			Player tempPlayer = new Player();
+			tempPlayer.setExternID(String.valueOf(playerItem.getId()));
+			tempPlayer.setName(playerItem.getName());
 
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri(System.getenv("CLOUDAMQP_URL"));
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-        String queueName = "work-queue-1";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("x-ha-policy", "all");
-        channel.queueDeclare(queueName, true, false, false, params);
-        QueueingConsumer consumer = new QueueingConsumer(channel);
-        channel.basicConsume(queueName, false, consumer);
-       
-        while (true) {
-            QueueingConsumer.Delivery delivery = consumer.nextDelivery(); 
-            if (delivery != null) {
-                String msg = new String(delivery.getBody(), "UTF-8");
-                logger.info("Message Received: " + msg);
-                channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-            }
-        }
+			String norm = Normalizer.normalize(playerItem.getName(), Normalizer.Form.NFD);
+			norm = norm.replaceAll("[^\\p{ASCII}]", "");
 
-    }
+			tempPlayer.setNormalizedName(norm);
+
+			playerService.save(tempPlayer);
+		}
+
+	}
 
 }
