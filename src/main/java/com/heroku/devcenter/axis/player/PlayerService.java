@@ -15,9 +15,16 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.heroku.devcenter.WorkerMain;
 
 public class PlayerService  {
 
+	final static Logger logger = LoggerFactory.getLogger(WorkerMain.class);
+
+	
 	Map<String, Player> map = new HashMap<String, Player>();
 	
 	public PlayerService(){
@@ -41,6 +48,8 @@ public class PlayerService  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		logger.info("already "+map.size()+" players here");
+		
 	
 	}
 	
@@ -48,6 +57,10 @@ public class PlayerService  {
 		String externID = aPlayer.getExternID();
 		Player tPlayer = map.get(externID);
 		if(tPlayer == null){
+			
+			logger.info("new player detected : "+aPlayer.getNormalizedName());
+			
+			
 			JSONObject tempJSONObject = new JSONObject();
 			
 			tempJSONObject.put("externID", aPlayer.getExternID());
