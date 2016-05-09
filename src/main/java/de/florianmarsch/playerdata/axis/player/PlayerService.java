@@ -1,4 +1,4 @@
-package com.heroku.devcenter.axis.player;
+package de.florianmarsch.playerdata.axis.player;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.heroku.devcenter.WorkerMain;
+import de.florianmarsch.playerdata.WorkerMain;
 
 public class PlayerService  {
 

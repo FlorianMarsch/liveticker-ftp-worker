@@ -1,4 +1,4 @@
-package com.heroku.devcenter.axis;
+package de.florianmarsch.playerdata.axis;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

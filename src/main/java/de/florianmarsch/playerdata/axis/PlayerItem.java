@@ -1,4 +1,4 @@
-package com.heroku.devcenter.axis;
+package de.florianmarsch.playerdata.axis;
 
 public class PlayerItem implements Comparable<PlayerItem>{
 	

@@ -1,4 +1,4 @@
-package com.heroku.devcenter;
+package de.florianmarsch.playerdata;
 
 import java.text.Normalizer;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.heroku.devcenter.axis.PlayerItem;
-import com.heroku.devcenter.axis.PlayerItemWebservice;
-import com.heroku.devcenter.axis.player.Player;
-import com.heroku.devcenter.axis.player.PlayerService;
+import de.florianmarsch.playerdata.axis.PlayerItem;
+import de.florianmarsch.playerdata.axis.PlayerItemWebservice;
+import de.florianmarsch.playerdata.axis.player.Player;
+import de.florianmarsch.playerdata.axis.player.PlayerService;
 
 public class WorkerMain {
 

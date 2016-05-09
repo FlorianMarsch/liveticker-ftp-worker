@@ -1,4 +1,4 @@
-package com.heroku.devcenter.axis.player;
+package de.florianmarsch.playerdata.axis.player;
 
 
 public class Player {

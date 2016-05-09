@@ -1,4 +1,4 @@
-package com.heroku.devcenter.axis;
+package de.florianmarsch.playerdata.axis;
 
 import java.util.Date;
 import java.util.Iterator;
