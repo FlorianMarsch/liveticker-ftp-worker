@@ -14,7 +14,7 @@ import javax.xml.rpc.encoding.SerializerFactory;
 
 import org.apache.axis.client.Service;
 
-import de.florianmarsch.playerdata.axis.club.Club;
+import de.florianmarsch.playerdata.club.Club;
 
 public class PlayerItemWebservice {
 	

@@ -1,4 +1,4 @@
-package de.florianmarsch.playerdata.axis.player;
+package de.florianmarsch.playerdata.player;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;

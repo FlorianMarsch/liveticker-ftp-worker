@@ -1,4 +1,4 @@
-package de.florianmarsch.playerdata.axis.club;
+package de.florianmarsch.playerdata.club;
 
 public enum Club {
 

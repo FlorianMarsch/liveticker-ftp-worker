@@ -1,4 +1,4 @@
-package de.florianmarsch.playerdata.axis.player;
+package de.florianmarsch.playerdata.player;
 
 
 public class Player {

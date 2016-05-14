@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import de.florianmarsch.playerdata.axis.PlayerItem;
 import de.florianmarsch.playerdata.axis.PlayerItemWebservice;
-import de.florianmarsch.playerdata.axis.player.Player;
-import de.florianmarsch.playerdata.axis.player.PlayerService;
+import de.florianmarsch.playerdata.player.Player;
+import de.florianmarsch.playerdata.player.PlayerService;
 
 public class WorkerMain {
 
