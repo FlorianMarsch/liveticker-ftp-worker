@@ -2,6 +2,7 @@ package de.florianmarsch.playerdata.axis;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -13,34 +14,19 @@ import javax.xml.rpc.encoding.SerializerFactory;
 
 import org.apache.axis.client.Service;
 
+import de.florianmarsch.playerdata.axis.club.Club;
+
 public class PlayerItemWebservice {
 	
 	
 	public List<PlayerItem> getAllPlayers() {
 		List<PlayerItem> tempReturn = new ArrayList<PlayerItem>();
 
-		List<Integer> clubs = new ArrayList<Integer>();
-		clubs.add(1);
-		clubs.add(12);
-		clubs.add(3);
-		clubs.add(8);
-		clubs.add(10);
-		clubs.add(68);
-		clubs.add(62);
-		clubs.add(5);
-		clubs.add(6);
-		clubs.add(18);
-		clubs.add(9);
-		clubs.add(13);
-		clubs.add(7);
-		clubs.add(17);
-		clubs.add(4);
-		clubs.add(14);
-		clubs.add(89);
-		clubs.add(90);
+		List<Club> clubs = new ArrayList<Club>();
+		clubs.addAll(Arrays.asList(Club.values()));
 
-		for (Integer id : clubs ) {
-			tempReturn.addAll(getplayersbyclubid(id));
+		for (Club club : clubs ) {
+			tempReturn.addAll(getplayersbyclubid(club.getWebserviceId()));
 		}
 		
 		return tempReturn;
