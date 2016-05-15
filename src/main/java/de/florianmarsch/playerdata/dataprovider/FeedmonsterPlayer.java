@@ -7,6 +7,9 @@ public class FeedmonsterPlayer {
 	private String lastName;
 	private String name;
 	private String position;
+	private String age;
+	private String thumbnail;
+	
 	public String getCountry() {
 		return country;
 	}
@@ -65,6 +68,18 @@ public class FeedmonsterPlayer {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
 	}
 	
 	

@@ -49,6 +49,8 @@ public class FeedmonsterDataService {
 				tempPlayer.setFirstName(player.getString("firstName"));
 				tempPlayer.setLastName(player.getString("lastName"));
 				tempPlayer.setPosition(player.getString("position"));
+				tempPlayer.setAge(player.getString("age"));
+				tempPlayer.setThumbnail(player.getString("thumbnailSrc"));
 				result.add(tempPlayer);
 			}
 		
