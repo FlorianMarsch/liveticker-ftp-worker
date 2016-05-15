@@ -25,7 +25,7 @@ public class ComunioDataService extends AbstractDataProvider{
 				
 				ComunioPlayer tempPlayer = new ComunioPlayer();
 				tempPlayer.setId(player.getString("id"));
-				tempPlayer.setName(normalize(player.getString("name")));
+				tempPlayer.setName(normalize(player.getString("name")).trim());
 				result.add(tempPlayer);
 			}
 		
