@@ -1,4 +1,4 @@
-package de.florianmarsch.playerdata.dataprovider;
+package de.florianmarsch.playerdata.dataprovider.comunio;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -17,40 +17,32 @@ import org.json.JSONObject;
 
 import de.florianmarsch.playerdata.club.Club;
 
-public class FeedmonsterDataService {
-
-	public List<FeedmonsterPlayer> getAllPlayers() {
-		List<FeedmonsterPlayer> tempReturn = new ArrayList<FeedmonsterPlayer>();
+public class ComunioDataService {
+	public List<ComunioPlayer> getAllPlayers() {
+		List<ComunioPlayer> tempReturn = new ArrayList<ComunioPlayer>();
 
 		List<Club> clubs = new ArrayList<Club>();
 		clubs.addAll(Arrays.asList(Club.values()));
 
 		for (Club club : clubs) {
-			tempReturn.addAll(getplayersbyclubid(club.getRestId()));
+			tempReturn.addAll(getplayersbyclubid(club.getWebserviceId()));
 		}
 
 		return tempReturn;
 	}
-
-	private Collection<FeedmonsterPlayer> getplayersbyclubid(Integer restId) {
-		List<FeedmonsterPlayer> result = new ArrayList<FeedmonsterPlayer>();
+	
+	private Collection<ComunioPlayer> getplayersbyclubid(Integer restId) {
+		List<ComunioPlayer> result = new ArrayList<ComunioPlayer>();
 		try {
-			String all = loadFile("https://vintagemonster.onefootball.com/api/teams/de/" + restId + ".json");
-			JSONObject document = new JSONObject(all);
-			JSONArray players = document.getJSONObject("data").getJSONObject("team").getJSONArray("players");
+			String all = loadFile("http://api.comunio.de/clubs/"+restId);
+			JSONArray players = new JSONObject(all).getJSONArray("squad");
 		
 			for (int i = 0; i < players.length(); i++) {
 				JSONObject player = players.getJSONObject(i);
 				
-				FeedmonsterPlayer tempPlayer = new FeedmonsterPlayer();
+				ComunioPlayer tempPlayer = new ComunioPlayer();
 				tempPlayer.setId(player.getString("id"));
 				tempPlayer.setName(player.getString("name"));
-				tempPlayer.setCountry(player.getString("country"));
-				tempPlayer.setFirstName(player.getString("firstName"));
-				tempPlayer.setLastName(player.getString("lastName"));
-				tempPlayer.setPosition(player.getString("position"));
-				tempPlayer.setAge(player.getString("age"));
-				tempPlayer.setThumbnail(player.getString("thumbnailSrc"));
 				result.add(tempPlayer);
 			}
 		
@@ -59,9 +51,9 @@ public class FeedmonsterDataService {
 			e.printStackTrace();
 		}
 		return result;
-
 	}
-
+	
+	
 	private String loadFile(String url) {
 
 		StringBuffer tempReturn = new StringBuffer();
@@ -84,6 +76,4 @@ public class FeedmonsterDataService {
 		}
 		return tempReturn.toString();
 	}
-	
-
 }

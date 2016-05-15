@@ -1,4 +1,4 @@
-package de.florianmarsch.playerdata.dataprovider;
+package de.florianmarsch.playerdata.dataprovider.feedmonster;
 
 public class FeedmonsterPlayer {
 	private String country;
