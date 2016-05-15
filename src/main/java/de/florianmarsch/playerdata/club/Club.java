@@ -20,9 +20,9 @@ public enum Club {
 	EintrachtFrankfurt(9,156),
 	VfBStuttgart(14,31),
 	Hannover96(17,153);
-//	SCFreiburg(,159),
+//	SCFreiburg(21,159),
 //	RBLeipzig(,885),
-//	FCNuernberg(,160);
+//	FCNuernberg(2,160);
 	
 	private Integer webserviceId;
 	private Integer restId;
