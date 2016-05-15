@@ -17,6 +17,12 @@ public class ComunioPlayer {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public String getLastName(){
+		String[] split = name.split(" ");
+		return split[split.length-1];
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
