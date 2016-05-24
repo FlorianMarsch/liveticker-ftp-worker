@@ -51,17 +51,13 @@ public class DataService {
 			player.setAbbreviationName(comunioPlayer.getName());
 		}else{
 			System.out.println("Found no Comunio for "+player.getName());
-			player.setAbbreviationName(player.getLastName());
+			player.setAbbreviationName(player.getName());
 		}
 	}
 
 	private ComunioPlayer findComunioPlayer(Player player, Collection<ComunioPlayer> comunioPlayers) {
 		for (ComunioPlayer comunioPlayer : comunioPlayers) {
 			String name = player.getLastName();
-			if(name == null){
-				// Raffael or Chicharito
-				name = player.getFirstName();
-			}
 			if(name.equals(comunioPlayer.getLastName())){
 				return comunioPlayer;
 			}
@@ -70,14 +66,9 @@ public class DataService {
 	}
 
 	private void applyValues(Player player, FeedmonsterPlayer feedmonsterPlayer) {
-		player.setAge(feedmonsterPlayer.getAge());
-		player.setCountry(feedmonsterPlayer.getCountry());
 		player.setFeedmonster(feedmonsterPlayer.getId());
-		player.setFirstName(feedmonsterPlayer.getFirstName());
-		player.setLastName(feedmonsterPlayer.getLastName());
 		player.setName(feedmonsterPlayer.getName());
 		player.setPosition(feedmonsterPlayer.getPosition());
-		player.setThumbnail(feedmonsterPlayer.getThumbnail());
 	}
 
 }

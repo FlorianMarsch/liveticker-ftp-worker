@@ -39,14 +39,9 @@ public class PlayerService {
 				tempPlayer.setId(player.getString("id"));
 				tempPlayer.setComunio(player.getString("comunio"));
 				tempPlayer.setFeedmonster(player.getString("feedmonster"));
-				tempPlayer.setCountry(player.getString("country"));
-				tempPlayer.setFirstName(player.getString("firstName"));
-				tempPlayer.setLastName(player.getString("lastName"));
 				tempPlayer.setName(player.getString("name"));
 				tempPlayer.setAbbreviationName(player.getString("abbreviationName"));
 				tempPlayer.setPosition(player.getString("position"));
-				tempPlayer.setAge(player.getString("age"));
-				tempPlayer.setThumbnail(player.getString("thumbnail"));
 
 				map.put(tempPlayer.getFeedmonster(), tempPlayer);
 			}
@@ -75,14 +70,10 @@ public class PlayerService {
 		try {
 			jsono.put("comunio", aPlayer.getComunio());
 			jsono.put("feedmonster", aPlayer.getFeedmonster());
-			jsono.put("country", aPlayer.getCountry());
-			jsono.put("firstName", aPlayer.getFirstName());
 			jsono.put("lastName", aPlayer.getLastName());
 			jsono.put("name", aPlayer.getName());
 			jsono.put("abbreviationName", aPlayer.getAbbreviationName());
 			jsono.put("position", aPlayer.getPosition());
-			jsono.put("age", aPlayer.getAge());
-			jsono.put("thumbnail", aPlayer.getThumbnail());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -18,9 +18,8 @@ public class FeedmonsterDataService extends AbstractDataProvider{
 	public Collection<FeedmonsterPlayer> getPlayersByClubId(Club club) {
 		List<FeedmonsterPlayer> result = new ArrayList<FeedmonsterPlayer>();
 		try {
-			String all = loadFile("https://vintagemonster.onefootball.com/api/teams/de/" + club.getRestId() + ".json");
-			JSONObject document = new JSONObject(all);
-			JSONArray players = document.getJSONObject("data").getJSONObject("team").getJSONArray("players");
+			String all = loadFile("http://liveticker-system-api.herokuapp.com/api/team/"+club.getRestId()+"/squad");
+			JSONArray players = new JSONObject(all).getJSONArray("data");
 		
 			for (int i = 0; i < players.length(); i++) {
 				JSONObject player = players.getJSONObject(i);
@@ -28,12 +27,7 @@ public class FeedmonsterDataService extends AbstractDataProvider{
 				FeedmonsterPlayer tempPlayer = new FeedmonsterPlayer();
 				tempPlayer.setId(player.getString("id"));
 				tempPlayer.setName(normalize(player.getString("name")));
-				tempPlayer.setCountry(player.getString("country"));
-				tempPlayer.setFirstName(normalize(player.getString("firstName")));
-				tempPlayer.setLastName(normalize(player.getString("lastName")));
 				tempPlayer.setPosition(player.getString("position"));
-				tempPlayer.setAge(player.getString("age"));
-				tempPlayer.setThumbnail(player.getString("thumbnailSrc"));
 				result.add(tempPlayer);
 			}
 		
