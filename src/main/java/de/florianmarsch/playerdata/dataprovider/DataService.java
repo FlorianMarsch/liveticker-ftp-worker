@@ -51,7 +51,7 @@ public class DataService {
 			player.setAbbreviationName(comunioPlayer.getName());
 		}else{
 			System.out.println("Found no Comunio for "+player.getName());
-			player.setAbbreviationName(player.getName());
+			player.setAbbreviationName(player.getLastName());
 		}
 	}
 
