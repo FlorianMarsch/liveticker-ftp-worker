@@ -39,7 +39,7 @@ public class FTPPusher {
 		String host = System.getenv("ftpgateway");
 		HttpPost httpPost = new HttpPost(host);
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		nvps.add(new BasicNameValuePair("file", filename));
+		nvps.add(new BasicNameValuePair("file", dir+filename));
 		nvps.add(new BasicNameValuePair("dir", dir));
 		nvps.add(new BasicNameValuePair("data", content));
 		try {

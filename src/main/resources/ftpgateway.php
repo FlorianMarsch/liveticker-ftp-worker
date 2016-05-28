@@ -7,5 +7,5 @@ if (!is_dir($dir)) {
   mkdir($dir);
 }
 
-file_put_contents($dir+$file, $data);
+file_put_contents($file, $data);
 ?>
