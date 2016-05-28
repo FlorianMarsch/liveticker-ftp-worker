@@ -14,8 +14,8 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FTP {
-	final static Logger logger = LoggerFactory.getLogger(FTP.class);
+public class FTPPusher {
+	final static Logger logger = LoggerFactory.getLogger(FTPPusher.class);
 
 
 	private FTPClient client;

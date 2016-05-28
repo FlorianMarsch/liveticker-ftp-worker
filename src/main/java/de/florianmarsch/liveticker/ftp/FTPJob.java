@@ -31,7 +31,7 @@ public class FTPJob implements Job {
 		for (FTPPushTask task : taks) {
 			try {
 				logger.info("start task "+task);
-				new FTP().save(task);
+				new FTPPusher().save(task);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
