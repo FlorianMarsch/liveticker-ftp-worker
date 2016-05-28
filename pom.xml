@@ -55,5 +55,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<artifactId>football-api-ftp-worker</artifactId>
 </project>
