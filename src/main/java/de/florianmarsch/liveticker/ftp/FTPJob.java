@@ -59,117 +59,43 @@ public class FTPJob implements Job {
 		task.setFilename("weeks.json");
 		tasks.add(task);
 
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10285/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10285.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10303/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10303.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10281/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10281.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10307/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10307.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10576/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10576.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10388/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10388.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10437/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10437.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10653/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10653.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10476/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10476.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10419/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10419.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10453/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10453.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10269/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10269.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10677/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10677.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10329/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10329.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10442/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10442.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10347/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10347.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10646/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10646.json");
-		tasks.add(task);
-
-		task = new FTPPushTask();
-		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/1229/team/10423/squad");
-		task.setDirectory("v1/api/ligue/1229/team/");
-		task.setFilename("10423.json");
-		tasks.add(task);
-
+		tasks.addAll(getTeamTasks(1229, 10285));
+		tasks.addAll(getTeamTasks(1229, 10303));
+		tasks.addAll(getTeamTasks(1229, 10281));
+		tasks.addAll(getTeamTasks(1229, 10307));
+		tasks.addAll(getTeamTasks(1229, 10576));
+		tasks.addAll(getTeamTasks(1229, 10388));
+		tasks.addAll(getTeamTasks(1229, 10437));
+		tasks.addAll(getTeamTasks(1229, 10653));
+		tasks.addAll(getTeamTasks(1229, 10476));
+		tasks.addAll(getTeamTasks(1229, 10419));
+		tasks.addAll(getTeamTasks(1229, 10453));
+		tasks.addAll(getTeamTasks(1229, 10269));
+		tasks.addAll(getTeamTasks(1229, 10677));
+		tasks.addAll(getTeamTasks(1229, 10329));
+		tasks.addAll(getTeamTasks(1229, 10442));
+		tasks.addAll(getTeamTasks(1229, 10347));
+		tasks.addAll(getTeamTasks(1229, 10646));
+		tasks.addAll(getTeamTasks(1229, 10423));
 		return tasks;
 	}
 
 
+	private List<FTPPushTask> getTeamTasks(int ligue, int team){
+		List<FTPPushTask> tasks= new ArrayList<FTPPushTask>();
+		
+		FTPPushTask task = new FTPPushTask();
+		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/"+ligue+"/team/"+team+"/squad");
+		task.setDirectory("v1/api/ligue/"+ligue+"/team/");
+		task.setFilename("10423.json");
+		tasks.add(task);
+		
+		task = new FTPPushTask();
+		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/"+ligue+"/team/"+team+"/squad");
+		task.setDirectory("v1/api/ligue/"+ligue+"/team/"+team+"/");
+		task.setFilename("squad.json");
+		tasks.add(task);
+		return tasks;
+	}
 
 }
