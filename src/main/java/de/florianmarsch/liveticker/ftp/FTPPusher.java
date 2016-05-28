@@ -40,8 +40,11 @@ public class FTPPusher {
 	private void logout() {
 	
 		try {
-			client.logout();
-		} catch (IOException e) {
+			boolean logout = client.logout();
+			if(!logout){
+				throw new Exception("could not logout");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -60,7 +63,10 @@ public class FTPPusher {
 		String pw = System.getenv("FTP_PASSWD");
 		try {
 			client.connect(host);
-			client.login(user, pw);
+			boolean login = client.login(user, pw);
+			if(!login){
+				throw new Exception("not logged in");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Login failed :"+e.getMessage(), e);
@@ -77,13 +83,20 @@ public class FTPPusher {
 				if (!pathname.isEmpty()) {
 					try {
 						if(client.isConnected() || client.isAvailable()){
-							client.makeDirectory(pathname);
-							client.changeWorkingDirectory("./" + pathname);
+							boolean makeDirectory = client.makeDirectory(pathname);
+							if(makeDirectory){
+								boolean changeWorkingDirectory = client.changeWorkingDirectory("./" + pathname);
+								if(!changeWorkingDirectory){
+									throw new Exception("could not change to working dir");
+								}
+							}else{
+								throw new Exception("could not created");
+							}
 						}else{
 							throw new Exception("Client not connected || available");
 						}
 					} catch (Exception e) {
-						throw new RuntimeException("Error creating dirs "+e.getMessage());
+						throw new RuntimeException("Error creating dirs : "+e.getMessage());
 					}
 				}
 			}
@@ -101,13 +114,15 @@ public class FTPPusher {
 			// Store file to server
 			//
 			if(client.isConnected() || client.isAvailable()){
-				client.storeFile(filename, fis);
+				boolean storeFile = client.storeFile(filename, fis);
+				if(!storeFile){
+					throw new Exception("file not created");
+				}
 			}else{
 				throw new Exception("Client not connected || available");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error creating file"+e.getMessage());
+			throw new RuntimeException("Error creating file : "+e.getMessage());
 		} finally {
 			try {
 				if (fis != null) {
@@ -134,7 +149,7 @@ public class FTPPusher {
 			}
 
 		} catch (Exception e) {
-			throw new RuntimeException("Errir reciving file "+e.getMessage());
+			throw new RuntimeException("Error reciving file : "+e.getMessage());
 		}
 		return tempReturn.toString();
 	}
