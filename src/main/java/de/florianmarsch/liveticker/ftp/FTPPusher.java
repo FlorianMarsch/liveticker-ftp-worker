@@ -28,7 +28,7 @@ public class FTPPusher {
 			String filename = task.getFilename();
 			String directory = task.getDirectory();
 			createDirs(directory);
-			upload(content, directory + filename);
+			upload(content,  filename);
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}finally {
@@ -112,9 +112,9 @@ public class FTPPusher {
 			// Store file to server
 			//
 			if(client.isConnected() || client.isAvailable()){
-				boolean storeFile = client.storeFile(filename, fis);
+				boolean storeFile = client.storeFile("./"+filename, fis);
 				if(!storeFile){
-					throw new Exception("file not created");
+					throw new Exception(filename +" not created");
 				}
 			}else{
 				throw new Exception("Client not connected || available");
