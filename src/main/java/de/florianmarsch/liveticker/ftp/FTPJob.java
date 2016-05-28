@@ -87,7 +87,7 @@ public class FTPJob implements Job {
 		FTPPushTask task = new FTPPushTask();
 		task.setUrl("http://liveticker-system-api.herokuapp.com/api/ligue/"+ligue+"/team/"+team+"/squad");
 		task.setDirectory("v1/api/ligue/"+ligue+"/team/");
-		task.setFilename("10423.json");
+		task.setFilename(team+".json");
 		tasks.add(task);
 		
 		task = new FTPPushTask();
