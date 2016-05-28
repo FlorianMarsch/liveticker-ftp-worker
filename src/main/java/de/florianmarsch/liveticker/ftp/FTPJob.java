@@ -22,24 +22,16 @@ import org.slf4j.LoggerFactory;
 public class FTPJob implements Job {
 
 	final static Logger logger = LoggerFactory.getLogger(FTPJob.class);
-	private FTPClient client;
 
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start ftp push");
 
 		List<FTPPushTask> taks = getTasks();
+		
 		for (FTPPushTask task : taks) {
 			try {
-				String url = task.getUrl();
-				String content = loadFile(url);
-				String filename = task.getFilename();
-				String directory = task.getDirectory();
-				login();
-				createDirs(directory);
-				logout();
-				login();
-				upload(content, directory + filename);
-				logout();
+				logger.info("start task "+task);
+				new FTP().save(task);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -48,36 +40,7 @@ public class FTPJob implements Job {
 		logger.info("end ftp push");
 	}
 
-	private void logout() {
-		try {
-			client.logout();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				client.disconnect();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
-
-	private void login() {
-		client = new FTPClient();
-		String host = System.getenv("FTP_HOST");
-		String user = System.getenv("FTP_USER");
-		String pw = System.getenv("FTP_PASSWD");
-		try {
-			client.connect(host);
-			client.login(user, pw);
-		} catch (SocketException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 
 	private List<FTPPushTask> getTasks() {
 		List<FTPPushTask> tasks = new ArrayList<FTPPushTask>();
@@ -217,71 +180,6 @@ public class FTPJob implements Job {
 		return tasks;
 	}
 
-	private void createDirs(String directory) {
 
-		List<String> asList = Arrays.asList(directory.split("/"));
-		for (String string : asList) {
-			if (string != null) {
-				String pathname = string.trim();
-				if (!pathname.isEmpty()) {
-					try {
-						client.makeDirectory(pathname);
-						client.changeWorkingDirectory("./" + pathname);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-
-	}
-
-	private void upload(String content, String filename) {
-
-		InputStream fis = null;
-
-		try {
-
-			fis = new ByteArrayInputStream(content.getBytes());
-
-			//
-			// Store file to server
-			//
-			client.storeFile(filename, fis);
-			client.logout();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fis != null) {
-					fis.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
-
-	public String loadFile(String url) {
-
-		StringBuffer tempReturn = new StringBuffer();
-		try {
-			URL u = new URL(url);
-			InputStream is = u.openStream();
-			DataInputStream dis = new DataInputStream(new BufferedInputStream(is));
-			String s;
-
-			while ((s = dis.readLine()) != null) {
-				tempReturn.append(s);
-			}
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return tempReturn.toString();
-	}
 
 }
