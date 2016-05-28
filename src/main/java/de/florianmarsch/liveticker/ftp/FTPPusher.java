@@ -68,7 +68,6 @@ public class FTPPusher {
 				throw new Exception("not logged in");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException("Login failed :"+e.getMessage(), e);
 		} 
 
