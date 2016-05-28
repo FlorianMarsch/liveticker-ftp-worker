@@ -28,18 +28,19 @@ public class FTPPusher {
 			String content = loadFile(url);
 			String filename = task.getFilename();
 			String directory = task.getDirectory();
-			upload(content, directory + filename);
+			upload(content, directory ,filename);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 	}
 
-	private void upload(String content, String filename) {
+	private void upload(String content, String dir, String filename) {
 		CloseableHttpClient client = HttpClients.createDefault();
 		String host = System.getenv("ftpgateway");
 		HttpPost httpPost = new HttpPost(host);
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("file", filename));
+		nvps.add(new BasicNameValuePair("dir", dir));
 		nvps.add(new BasicNameValuePair("data", content));
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps));
