@@ -112,7 +112,7 @@ public class SyncJob implements Job {
 		PushTask pushTask = new PushTask();
 		pushTask.setContent(array.toString());
 		pushTask.setDirectory("v1/api/league/" + ligue.getId() + "/");
-		pushTask.setFilename("playera.json");
+		pushTask.setFilename("players.json");
 		pusher.save(pushTask);
 
 	}
