@@ -1,4 +1,4 @@
-package de.florianmarsch.liveticker.ftp;
+package de.florianmarsch.ftp;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -19,11 +19,10 @@ import org.slf4j.LoggerFactory;
 public class FTPPusher {
 	final static Logger logger = LoggerFactory.getLogger(FTPPusher.class);
 
-	public void save(FTPPushTask task) {
+	public void save(PushTask task) {
 		try {
 
-			String url = task.getUrl();
-			String content = loadFile(url);
+			String content = task.getContent();
 			String filename = task.getFilename();
 			String directory = task.getDirectory();
 			upload(content, directory ,filename);
@@ -33,6 +32,7 @@ public class FTPPusher {
 	}
 
 	private void upload(String content, String dir, String filename) {
+		logger.info(dir+filename);
 		CloseableHttpClient client = HttpClients.createDefault();
 		String host = System.getenv("ftpgateway");
 		HttpPost httpPost = new HttpPost(host);

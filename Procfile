@@ -1,1 +1,1 @@
-worker: java $JAVA_OPTS -cp target/classes:target/dependency/* de.florianmarsch.liveticker.WorkerMain
+worker: java $JAVA_OPTS -cp target/classes:target/dependency/* de.florianmarsch.WorkerMain

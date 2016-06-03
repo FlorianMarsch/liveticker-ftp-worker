@@ -1,15 +1,16 @@
-package de.florianmarsch.liveticker.ftp;
+package de.florianmarsch.ftp;
 
-public class FTPPushTask {
+public class PushTask {
 
-	private String url;
+	private String content;
 	private String directory;
 	private String filename;
-	public String getUrl() {
-		return url;
+	
+	public String getContent() {
+		return content;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getDirectory() {
 		return directory;
@@ -25,9 +26,7 @@ public class FTPPushTask {
 	}
 	@Override
 	public String toString() {
-		return "FTPPushTask [url=" + url + ", directory=" + directory + ", filename=" + filename + "]";
+		return "PushTask [content=" + content.length() + " bytes, directory=" + directory + ", filename=" + filename + "]";
 	}
-
-	
 
 }
