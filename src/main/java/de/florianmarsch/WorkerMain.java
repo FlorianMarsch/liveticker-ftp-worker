@@ -23,7 +23,7 @@ public class WorkerMain {
 	public static void main(String[] args) throws Exception {
 		Accessor accessor = new Accessor();
 
-		List<Ligue> ligues = accessor.getLigues();
+		List<Ligue> ligues = accessor.getLigues(System.getenv("soccerama-current-league"));
 		if(ligues == null || ligues.isEmpty() || ligues.size() > 1){
 			throw new IllegalArgumentException("Excpected only 1 Ligue");
 		}

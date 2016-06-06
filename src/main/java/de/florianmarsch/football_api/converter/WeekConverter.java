@@ -15,7 +15,7 @@ public class WeekConverter {
 		List<Week> response = new ArrayList<Week>();
 		try {
 			JSONObject jsonObject = new JSONObject(content);
-			JSONArray weeks = jsonObject.getJSONObject("rounds").getJSONArray("rounds");
+			JSONArray weeks = jsonObject.getJSONObject("rounds").getJSONArray("data");
 			for (int i = 0; i < weeks.length(); i++) {
 				JSONObject week = weeks.getJSONObject(i);
 				response.add(new Week(week));

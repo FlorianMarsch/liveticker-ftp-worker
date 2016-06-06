@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class UrlBuilder {
 
-	private String baseUrl = "https://api.soccerama.pro/v1/";
+	private String baseUrl = "https://api.soccerama.pro/v1.1/";
 	private String endpoint;
 	private String endpointParameter;
 	private Set<String> includes = new HashSet<String>();
@@ -73,8 +73,8 @@ public class UrlBuilder {
 		return new UrlBuilder().setEndpoint("teams/season").setParameter(season).build();
 	}
 
-	public URL getSquadUrl(String team) {
-		return new UrlBuilder().setEndpoint("players/team").addInclude("position").setParameter(team).build();
+	public URL getSquadUrl(String team, String aSeasonID) {
+		return new UrlBuilder().setEndpoint("players/team").addInclude("players").setParameter(team+"/season/"+aSeasonID).build();
 	}
 
 	public URL getWeekUrl(String season) {

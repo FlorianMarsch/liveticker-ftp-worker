@@ -15,8 +15,8 @@ public class Soccerama {
 		return new Request(urlbuilder.getTeamUrl(season)).submit();
 	}
 
-	public String getSquads(String team) {
-		return new Request(urlbuilder.getSquadUrl(team)).submit();
+	public String getSquads(String team, String aSeasonID) {
+		return new Request(urlbuilder.getSquadUrl(team, aSeasonID)).submit();
 	}
 
 	public String getWeeks(String season) {

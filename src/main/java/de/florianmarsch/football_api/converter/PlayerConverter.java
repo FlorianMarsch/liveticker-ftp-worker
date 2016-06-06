@@ -15,7 +15,7 @@ public class PlayerConverter {
 		List<Player> response = new ArrayList<Player>();
 		try {
 			JSONObject jsonObject = new JSONObject(content);
-			JSONArray players = jsonObject.getJSONArray("players");
+			JSONArray players = jsonObject.getJSONObject("players").getJSONArray("data");
 			for (int i = 0; i < players.length(); i++) {
 				JSONObject player = players.getJSONObject(i);
 				response.add(new Player(player));

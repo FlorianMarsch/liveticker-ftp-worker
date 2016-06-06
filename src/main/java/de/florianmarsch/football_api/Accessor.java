@@ -3,6 +3,7 @@ package de.florianmarsch.football_api;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import de.florianmarsch.football_api.converter.EventConverter;
@@ -20,19 +21,27 @@ public class Accessor {
 	
 	private Soccerama soccerama = new Soccerama();
 
-	public List<Ligue> getLigues() {
+	public List<Ligue> getLigues(String aLeagueID) {
 		String content = soccerama.getLigues();
-		return new LigueConverter().convert(content);
+		List<Ligue> convert = new LigueConverter().convert(content);
+		Iterator<Ligue> it = convert.iterator();
+		while (it.hasNext()) {
+			Ligue ligue =  it.next();
+			if(!ligue.getId().equals(Integer.valueOf(aLeagueID))){
+				it.remove();
+			}
+		}
+		
+		return convert;
 	}
 
 	public List<Team> getTeams(Ligue aLigue) {
-		Integer currentSeason = aLigue.getCurrentSeason();
-		String content = soccerama.getTeams(currentSeason.toString());
+		String content = soccerama.getTeams(System.getenv("soccerama-current-season"));
 		return new TeamConverter().convert(content);
 	}
 
-	public List<Player> getSquads(Team aTeam) {
-		String content = soccerama.getSquads(aTeam.getId().toString());
+	public List<Player> getSquads(Team aTeam, String aSeasonID) {
+		String content = soccerama.getSquads(aTeam.getId().toString(), aSeasonID);
 		List<Player> convert = new PlayerConverter().convert(content);
 		for (Player player : convert) {
 			player.setTeam(aTeam.getId());
@@ -41,8 +50,7 @@ public class Accessor {
 	}
 
 	public List<Week> getWeeks(Ligue aLigue) {
-		Integer currentSeason = aLigue.getCurrentSeason();
-		String content =soccerama.getWeeks(currentSeason.toString());
+		String content =soccerama.getWeeks(System.getenv("soccerama-current-season"));
 		return new WeekConverter().convert(content);
 	}
 

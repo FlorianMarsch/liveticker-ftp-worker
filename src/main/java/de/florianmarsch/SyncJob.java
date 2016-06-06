@@ -130,7 +130,7 @@ public class SyncJob implements Job {
 
 	private void copyPlayers(Ligue ligue, Team team) {
 
-		List<Player> squad = accessor.getSquads(team);
+		List<Player> squad = accessor.getSquads(team, System.getenv("soccerama-current-season"));
 		players.addAll(squad);
 		JSONArray array = new JSONArray();
 		for (Player player : squad) {
