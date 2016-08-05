@@ -30,8 +30,10 @@ public class Week {
 			
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-			from = df.parse(aJsonObject.getString("started_at"));
-			to = df.parse(aJsonObject.getString("ended_at"));
+			String first = aJsonObject.getString("kickoffFirst");
+			from = df.parse(first.substring(0, first.indexOf("T")));
+			String last = aJsonObject.getString("kickoffLast");
+			to = df.parse(last.substring(0, last.indexOf("T")));
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
