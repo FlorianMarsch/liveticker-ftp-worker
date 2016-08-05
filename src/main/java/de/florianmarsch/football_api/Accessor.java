@@ -19,7 +19,7 @@ import de.florianmarsch.football_api.vo.Team;
 import de.florianmarsch.football_api.vo.Week;
 
 public class Accessor {
-	
+
 	private OneFootball api = new OneFootball();
 
 	public List<Ligue> getLigues() {
@@ -43,19 +43,13 @@ public class Accessor {
 	}
 
 	public List<Week> getWeeks(Ligue aLigue) {
-		String content =api.getWeeks(aLigue.getId(), aLigue.getCurrentSeason());
+		String content = api.getWeeks(aLigue.getId(), aLigue.getCurrentSeason());
 		return new WeekConverter().convert(content);
 	}
 
-	public List<Event> getEvents(Integer aCompetition,Integer aSeason,Week aWeek) {
-		List<Event> response = new ArrayList<Event>();
-		List<Date> days = aWeek.getDays();
-		for (Date date : days) {
-			String content = api.getEvents(aCompetition, aSeason, aWeek.getId());
-			response.addAll(new EventConverter().convert(content));
-		}
-		return response;
+	public List<Event> getEvents(Integer aCompetition, Integer aSeason, Week aWeek) {
+		String content = api.getEvents(aCompetition, aSeason, aWeek.getId());
+		return new ArrayList<Event>(new EventConverter().convert(content));
 	}
-
 
 }
