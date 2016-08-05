@@ -7,15 +7,11 @@ public class Team {
 
 	private Integer id;
 	private String name;
-	private String twitter;
-	private String logo;
 	
 	public Team(JSONObject aJsonObject){
 		try {
-			id = aJsonObject.getInt("id");
+			id = aJsonObject.getInt("idInternal");
 			name = aJsonObject.getString("name");
-			twitter = aJsonObject.getString("twitter");
-			logo = aJsonObject.getString("logo");
 		} catch (JSONException e) {
 			throw new RuntimeException("Error converting Team from JSON : "+e.getMessage());
 		}
@@ -37,21 +33,7 @@ public class Team {
 		this.name = name;
 	}
 
-	public String getTwitter() {
-		return twitter;
-	}
 
-	public void setTwitter(String twitter) {
-		this.twitter = twitter;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
 
 	@Override
 	public int hashCode() {
@@ -82,8 +64,6 @@ public class Team {
 			JSONObject json = new JSONObject();
 			json.put("id", id);
 			json.put("name", name);
-			json.put("twitter", twitter);
-			json.put("logo", logo);
 			return json;
 		} catch (JSONException e) {
 			throw new RuntimeException("Error creating JSON : " + e.getMessage());

@@ -15,7 +15,7 @@ public class TeamConverter {
 		List<Team> response = new ArrayList<Team>();
 		try {
 			JSONObject jsonObject = new JSONObject(content);
-			JSONArray teams = jsonObject.getJSONArray("data");
+			JSONArray teams = jsonObject.getJSONArray("teams");
 			for (int i = 0; i < teams.length(); i++) {
 				JSONObject team = teams.getJSONObject(i);
 				response.add(new Team(team));

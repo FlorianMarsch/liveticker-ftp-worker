@@ -11,10 +11,9 @@ public class Ligue {
 	
 	public Ligue(JSONObject aJsonObject){
 		try {
-			id = aJsonObject.getInt("id");
-			JSONObject season = aJsonObject.getJSONObject("currentSeason");
-			currentSeason = season.getInt("id");
-			name = aJsonObject.getString("name") +" "+season.getString("name");
+			id = aJsonObject.getInt("competitionId");
+			currentSeason = aJsonObject.getInt("seasonId");
+			name = aJsonObject.getString("competitionName") ;
 		} catch (JSONException e) {
 			throw new RuntimeException("Error converting ligue from JSON : "+e.getMessage());
 		}

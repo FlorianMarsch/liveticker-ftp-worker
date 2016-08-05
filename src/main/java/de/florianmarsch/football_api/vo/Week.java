@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import org.json.JSONObject;
 
 public class Week {
 
+	private Integer id;
 	private Integer number;
 	private boolean active;
 	private Date from;
@@ -23,8 +23,11 @@ public class Week {
 
 	public Week(JSONObject aJsonObject) {
 		try {
-			number = aJsonObject.getInt("name");
+			String name = aJsonObject.getString("name");
+			number = Integer.valueOf(name.substring(0, name.indexOf(".")));
 
+			id = aJsonObject.getInt("id");
+			
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 			from = df.parse(aJsonObject.getString("started_at"));
@@ -138,6 +141,14 @@ public class Week {
 		} catch (JSONException e) {
 			throw new RuntimeException("Error creating JSON : " + e.getMessage());
 		}
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

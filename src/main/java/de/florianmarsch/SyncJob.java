@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +22,6 @@ public class SyncJob implements Job {
 
 	final static Logger logger = LoggerFactory.getLogger(SyncJob.class);
 
-	private Ligue ligue;
 	private Accessor accessor = new Accessor();
 	private FTPPusher pusher = new FTPPusher();
 	private List<Player> players = new ArrayList<Player>();
@@ -31,19 +29,11 @@ public class SyncJob implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start ftp push");
 
-		if (ligue == null) {
-			try {
-				ligue = (Ligue) context.getScheduler().getContext().get("ligue");
-				if (ligue == null) {
-					throw new RuntimeException("Ligue not configed");
-				}
-			} catch (SchedulerException e) {
-				throw new RuntimeException(e.getMessage());
-			}
+		List<Ligue> ligues = accessor.getLigues();
+		for (Ligue ligue : ligues) {
+			copyLigue(ligue);
+			players.clear();
 		}
-
-		copyLigue(ligue);
-		players.clear();
 		logger.info("end ftp push");
 	}
 
@@ -130,7 +120,7 @@ public class SyncJob implements Job {
 
 	private void copyPlayers(Ligue ligue, Team team) {
 
-		List<Player> squad = accessor.getSquads(team, System.getenv("soccerama-current-season"));
+		List<Player> squad = accessor.getSquads(team);
 		players.addAll(squad);
 		JSONArray array = new JSONArray();
 		for (Player player : squad) {

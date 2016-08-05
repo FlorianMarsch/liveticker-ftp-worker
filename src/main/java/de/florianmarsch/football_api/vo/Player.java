@@ -13,7 +13,7 @@ public class Player {
 		try {
 			id = aJsonObject.getInt("id");
 			name = aJsonObject.getString("name");
-//			position = aJsonObject.getJSONObject("position").getString("name");
+			position = aJsonObject.getString("position");
 		} catch (JSONException e) {
 			throw new RuntimeException("Error converting Player from JSON : "+e.getMessage());
 		}

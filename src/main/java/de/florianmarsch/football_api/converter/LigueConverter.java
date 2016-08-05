@@ -15,7 +15,7 @@ public class LigueConverter {
 		List<Ligue> response = new ArrayList<Ligue>();
 		try {
 			JSONObject jsonObject = new JSONObject(content);
-			JSONArray leagues = jsonObject.getJSONArray("data");
+			JSONArray leagues = jsonObject.getJSONArray("competitions");
 			for (int i = 0; i < leagues.length(); i++) {
 				JSONObject league = leagues.getJSONObject(i);
 				response.add(new Ligue(league));
