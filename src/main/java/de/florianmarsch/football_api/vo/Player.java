@@ -1,5 +1,7 @@
 package de.florianmarsch.football_api.vo;
 
+import java.text.Normalizer;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,7 +82,12 @@ public class Player {
 		try {
 			JSONObject json = new JSONObject();
 			json.put("id", id);
-			json.put("name", name);
+			json.put("name", name); 
+			String[] split = name.split(" ");
+			String lastname = split[split.length];
+			String norm = Normalizer.normalize(lastname , Normalizer.Form.NFD);
+			norm = norm.replaceAll("[^\\p{ASCII}]", "");
+			json.put("lastname", norm);
 			json.put("position", position);
 			json.put("team", team);
 			return json;
