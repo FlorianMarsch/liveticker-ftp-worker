@@ -7,11 +7,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import de.florianmarsch.WorkerMain;
 import de.florianmarsch.football_api.vo.Event;
 
 public class EventConverter {
 
+	final static Logger logger = LoggerFactory.getLogger(EventConverter.class);
+
+	
 	public Collection<? extends Event> convert(String content) {
 		List<Event> response = new ArrayList<Event>();
 		try {
@@ -34,6 +40,7 @@ public class EventConverter {
 			}
 			return response;
 		} catch (JSONException e) {
+			logger.error(content);
 			throw new RuntimeException("Error reading Events from JSON : "+e.getMessage());
 		}
 	}
