@@ -84,7 +84,7 @@ public class Player {
 			json.put("id", id);
 			json.put("name", name); 
 			String[] split = name.split(" ");
-			String lastname = split[split.length];
+			String lastname = split[split.length-1];
 			String norm = Normalizer.normalize(lastname , Normalizer.Form.NFD);
 			norm = norm.replaceAll("[^\\p{ASCII}]", "");
 			json.put("lastname", norm);
