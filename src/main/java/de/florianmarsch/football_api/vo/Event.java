@@ -7,13 +7,13 @@ public class Event {
 
 	private Integer id;
 	private String type;
-	private Integer player;
+	private String player;
 
 	public Event(JSONObject aJsonObject) {
 		try {
 			id = aJsonObject.getInt("eventId");
 			type = aJsonObject.getString("type");
-			player = aJsonObject.getJSONObject("player").getInt("id");
+			player = aJsonObject.getJSONObject("player").getString("name");
 		} catch (JSONException e) {
 			throw new RuntimeException("Error converting Event from JSON : " + e.getMessage());
 		}
@@ -60,11 +60,11 @@ public class Event {
 		this.type = type;
 	}
 
-	public Integer getPlayer() {
+	public String getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Integer player) {
+	public void setPlayer(String player) {
 		this.player = player;
 	}
 
