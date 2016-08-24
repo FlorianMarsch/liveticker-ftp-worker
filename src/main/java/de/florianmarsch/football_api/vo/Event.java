@@ -11,9 +11,9 @@ public class Event {
 
 	public Event(JSONObject aJsonObject) {
 		try {
-			id = aJsonObject.getInt("id");
+			id = aJsonObject.getInt("eventId");
 			type = aJsonObject.getString("type");
-			player = aJsonObject.getInt("player_id");
+			player = aJsonObject.getJSONObject("player").getInt("id");
 		} catch (JSONException e) {
 			throw new RuntimeException("Error converting Event from JSON : " + e.getMessage());
 		}
