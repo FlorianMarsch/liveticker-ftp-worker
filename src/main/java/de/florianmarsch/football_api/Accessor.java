@@ -25,6 +25,15 @@ public class Accessor {
 	public List<Ligue> getLigues() {
 		String content = api.getLigues();
 		List<Ligue> convert = new LigueConverter().convert(content);
+		
+		Iterator<Ligue> iterator = convert.iterator();
+		while (iterator.hasNext()) {
+			Ligue next = iterator.next();
+			if(next.getId() != 1){
+				iterator.remove();
+			}
+			
+		}
 		return convert;
 	}
 
