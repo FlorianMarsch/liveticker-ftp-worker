@@ -5,13 +5,13 @@ import org.json.JSONObject;
 
 public class Event {
 
-	private Integer id;
+	private Long id;
 	private String type;
 	private String player;
 
 	public Event(JSONObject aJsonObject) {
 		try {
-			id = aJsonObject.getInt("eventId");
+			id = aJsonObject.getLong("eventId");
 			type = aJsonObject.getString("type");
 			player = aJsonObject.getJSONObject("player").getString("name");
 		} catch (JSONException e) {
@@ -44,11 +44,11 @@ public class Event {
 		return true;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
