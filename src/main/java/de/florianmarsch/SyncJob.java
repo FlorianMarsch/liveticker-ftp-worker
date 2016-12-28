@@ -1,5 +1,7 @@
 package de.florianmarsch;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.florianmarsch.football_api.Accessor;
+import de.florianmarsch.football_api.url.Request;
 import de.florianmarsch.football_api.vo.Ligue;
 import de.florianmarsch.football_api.vo.Player;
 import de.florianmarsch.football_api.vo.Team;
@@ -29,12 +32,26 @@ public class SyncJob implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start ftp push");
 
+		copyLeaderBoard();
+		
 		List<Ligue> ligues = accessor.getLigues();
 		for (Ligue ligue : ligues) {
 			copyLigue(ligue);
 			players.clear();
 		}
 		logger.info("end ftp push");
+	}
+
+	private void copyLeaderBoard() {
+		
+			
+			try {
+				new Request(new URL("http://football-api.florianmarsch.de/leaderboard_download.php")).submit();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 	private void copyLigue(Ligue ligue) {
