@@ -3,6 +3,7 @@ package de.florianmarsch;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -88,6 +89,22 @@ public class SyncJob implements Job {
 
 	private void copyAllWeeks(Ligue ligue, List<Week> weeks) {
 
+		
+		Week currentWeek = null;
+		Week nextWeek = null;
+		for (Week week : weeks) {
+			if(week.isActive()){
+				currentWeek = week;
+			}
+			if(week.getFrom().after(new Date()) && nextWeek == null){
+				nextWeek = week;
+			}
+		}
+		if(currentWeek == null){
+			nextWeek.setActive(Boolean.TRUE);
+		}
+		
+		
 		JSONArray array = new JSONArray();
 		for (Week week : weeks) {
 			array.put(week.toJson());
